@@ -10,17 +10,19 @@ import { UserProvider } from "./utils/UserContext";
 function App() {
   return (
     <Router>
-      <Route exact path="/" component={Landing}></Route>
       <JobProvider>
+        <Route exact path="/" component={Landing}></Route>
+
         <CustomerProvider>
           <UserProvider>
             <Route exact path="/lists" component={Lists}></Route>
           </UserProvider>
         </CustomerProvider>
+
+        <Switch>
+          <Route exact path="/job/:id" component={Job} />
+        </Switch>
       </JobProvider>
-      <Switch>
-        <Route exact path="/job/:id" component={Job} />
-      </Switch>
     </Router>
   );
 }
