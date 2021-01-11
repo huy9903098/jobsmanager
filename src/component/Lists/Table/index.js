@@ -13,7 +13,8 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function TableCustom() {
+export default function TableCustom(props) {
+  const { tab, value } = props;
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("jobname");
 
@@ -21,7 +22,6 @@ export default function TableCustom() {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-    console.log(order, "and", orderBy);
   };
   const classes = useStyle();
   return (
@@ -29,11 +29,17 @@ export default function TableCustom() {
       <TableContainer className={classes.tableContainer}>
         <Table stickyHeader aria-label="sticky table">
           <TableHeadCustom
+            tab={tab}
             order={order}
             orderBy={orderBy}
             onRequestSort={handleRequestSort}
           />
-          <TableBodyCustom order={order} orderBy={orderBy} />
+          <TableBodyCustom
+            rows={value}
+            tab={tab}
+            order={order}
+            orderBy={orderBy}
+          />
         </Table>
       </TableContainer>
     </Paper>

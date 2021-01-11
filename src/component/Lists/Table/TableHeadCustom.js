@@ -5,7 +5,7 @@ import {
   TableRow,
   TableSortLabel,
 } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const useStyle = makeStyles((theme) => ({
   visuallyHidden: {
@@ -20,31 +20,64 @@ const useStyle = makeStyles((theme) => ({
     width: 1,
   },
 }));
-const headCells = [
-  { id: "jobname", numeric: false, disablePadding: true, label: "JOB ID" },
-  { id: "jobid", numeric: true, disablePadding: true, label: "JOB ID" },
-  { id: "customer", numeric: true, disablePadding: false, label: "CUSTOMER" },
-  { id: "location", numeric: true, disablePadding: false, label: "LOCATION" },
+const jobCells = [
+  { id: "jobname", numeric: false, label: "JOB NAME" },
+  { id: "id", numeric: true, label: "JOB ID" },
+  { id: "customer", numeric: true, label: "CUSTOMER" },
+  { id: "location", numeric: true, label: "LOCATION" },
   {
     id: "startDate",
     numeric: true,
-    disablePadding: false,
+
     label: "DATE START",
   },
-  { id: "endDate", numeric: true, disablePadding: false, label: "DATE END" },
-  { id: "status", numeric: true, disablePadding: false, label: "STATUS" },
+  { id: "endDate", numeric: true, label: "DATE END" },
+  { id: "status", numeric: true, label: "STATUS" },
 ];
+
+const customerCells = [
+  {
+    id: "name",
+    numeric: false,
+    label: "CUSTOMER NAME",
+  },
+  { id: "id", numeric: true, label: "CUSTOMER ID" },
+  { id: "location", numeric: true, label: "LOCATION" },
+];
+
+const userCells = [
+  { id: "name", numeric: false, label: "NAME" },
+  { id: "id", numeric: true, label: "USER ID" },
+];
+
 export default function TableHeadCustom(props) {
-  const { order, orderBy, onRequestSort } = props;
+  const { order, orderBy, onRequestSort, tab } = props;
+  const [headers, setHeaders] = useState(jobCells);
   const classes = useStyle();
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
+  useEffect(() => {
+    switch (tab) {
+      case "jobs":
+        setHeaders(jobCells);
+        break;
+      case "customers":
+        setHeaders(customerCells);
+        break;
+      case "users":
+        setHeaders(userCells);
+        break;
+      default:
+        setHeaders(jobCells);
+    }
+  }, [tab]);
+
   return (
     <TableHead>
       <TableRow>
-        {headCells.map((headCell) => (
+        {headers.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}

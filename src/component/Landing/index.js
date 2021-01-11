@@ -21,8 +21,7 @@ export default function Landing() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(username, " and ", password);
-    window.location.href = "/home";
+    window.location.href = "/lists";
   }
   return (
     <div>

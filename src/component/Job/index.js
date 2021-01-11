@@ -33,7 +33,7 @@ export default function Job() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
-            onClick={() => (window.location.href = "/home")}
+            onClick={() => (window.location.href = "/lists")}
           >
             <ArrowBackIcon fontSize="large" />
           </IconButton>
