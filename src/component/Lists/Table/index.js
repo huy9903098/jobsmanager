@@ -14,7 +14,7 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 export default function TableCustom(props) {
-  const { tab, value } = props;
+  const { tab, value, setUserIdCreateJob, userIdCreateJob } = props;
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("jobname");
 
@@ -36,6 +36,8 @@ export default function TableCustom(props) {
           />
           <TableBodyCustom
             rows={value}
+            userIdCreateJob={userIdCreateJob}
+            setUserIdCreateJob={setUserIdCreateJob}
             tab={tab}
             order={order}
             orderBy={orderBy}

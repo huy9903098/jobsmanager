@@ -1,4 +1,4 @@
-import { TableBody, TableCell, TableRow } from "@material-ui/core";
+import { makeStyles, TableBody, TableCell, TableRow } from "@material-ui/core";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -26,14 +26,42 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
+const useStyle = makeStyles((theme) => ({
+  chosenName: {
+    backgroundColor: "#808B96",
+    cursor: "pointer",
+  },
+  chooseName: {
+    cursor: "pointer",
+  },
+}));
+
 export default function TableBodyCustom(props) {
-  const { order, orderBy, rows, tab } = props;
+  const {
+    order,
+    orderBy,
+    rows,
+    tab,
+    setUserIdCreateJob,
+    userIdCreateJob,
+  } = props;
+  const classes = useStyle();
   return (
     <TableBody>
       {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
         if (tab === "customers") {
           return (
-            <TableRow key={row.id}>
+            <TableRow
+              className={
+                userIdCreateJob.type === tab && userIdCreateJob.id === row.id
+                  ? classes.chosenName
+                  : classes.chooseName
+              }
+              onClick={() =>
+                setUserIdCreateJob({ id: row.id, type: "customers" })
+              }
+              key={row.id}
+            >
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
@@ -43,7 +71,15 @@ export default function TableBodyCustom(props) {
           );
         } else if (tab === "users") {
           return (
-            <TableRow key={row.id}>
+            <TableRow
+              className={
+                userIdCreateJob.type === tab && userIdCreateJob.id === row.id
+                  ? classes.chosenName
+                  : classes.chooseName
+              }
+              onClick={() => setUserIdCreateJob({ id: row.id, type: "users" })}
+              key={row.id}
+            >
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
@@ -53,6 +89,7 @@ export default function TableBodyCustom(props) {
         } else {
           const startDateConvert = row.startDate.toLocaleDateString();
           const endDateConvert = row.endDate.toLocaleDateString();
+
           return (
             <TableRow key={row.id}>
               <TableCell component="th" scope="row">
