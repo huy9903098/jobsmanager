@@ -1,6 +1,5 @@
 import { Button, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,8 +35,6 @@ export default function CreateTaskModal({
   closeModel,
 }) {
   const classes = useStyles();
-  // const [currentJob, setCurrentJob] = useState(jobData);
-  const { id } = useParams();
   const [task, setCreateTask] = useState({
     id: uuidv4,
     name: "",
@@ -57,6 +54,7 @@ export default function CreateTaskModal({
   };
 
   const handleCreateTask = () => {
+    task.dueDate = new Date(task.dueDate);
     let currentJob = { ...jobData, tasks: [...jobData["tasks"], task] };
 
     setJobs(() => {
@@ -72,7 +70,7 @@ export default function CreateTaskModal({
 
   const handleAssignTask = (taskChoose) => {
     const taskIndex = jobData.tasks.findIndex((emp) => {
-      return emp.id.toString() === taskChoose.id;
+      return emp.id === taskChoose.id;
     });
 
     let currentJob = jobData;
@@ -145,14 +143,6 @@ export default function CreateTaskModal({
                 {task.name}
               </Button>
             ))}
-          <Button
-            variant="contained"
-            color="secondary"
-            fullWidth
-            className={classes.taskBtn}
-          >
-            ASSIGN
-          </Button>
         </>
       )}
     </div>
