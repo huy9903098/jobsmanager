@@ -58,7 +58,7 @@ export default function CreateTaskModal({
 
   const handleCreateTask = () => {
     let currentJob = { ...jobData, tasks: [...jobData["tasks"], task] };
-    // console.log("jobs", jobs);
+
     setJobs(() => {
       const jobIndex = jobs.findIndex((emp) => {
         return emp.id.toString() === currentJob.id;

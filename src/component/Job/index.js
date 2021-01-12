@@ -76,6 +76,7 @@ export default function Job() {
             chats={chats}
             jobId={id}
             jobs={jobs}
+            setChats={setChats}
             setJobs={setJobs}
             jobData={jobData}
           />

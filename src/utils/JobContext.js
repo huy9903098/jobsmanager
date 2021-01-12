@@ -66,7 +66,7 @@ export const JobProvider = (props) => {
       startDate: new Date(2002, 5, 7),
       status: "Closed",
       info: "Clicked text to eidt",
-      tasks: {},
+      tasks: [],
     },
     {
       customer: "zhongli",
@@ -77,7 +77,7 @@ export const JobProvider = (props) => {
       startDate: new Date(2011, 4, 1),
       status: "Ongoing",
       info: "Clicked text to eidt",
-      tasks: {},
+      tasks: [],
     },
     {
       customer: "Jon",
@@ -88,7 +88,7 @@ export const JobProvider = (props) => {
       startDate: new Date(2002, 1, 1),
       status: "Ongoing",
       info: "Clicked text to eidt",
-      tasks: {},
+      tasks: [],
     },
     {
       customer: "Pete",
@@ -99,7 +99,7 @@ export const JobProvider = (props) => {
       startDate: new Date(2002, 1, 1),
       status: "Pending",
       info: "Clicked text to eidt",
-      tasks: {},
+      tasks: [],
     },
     {
       customer: "Lisa",
@@ -110,7 +110,7 @@ export const JobProvider = (props) => {
       startDate: new Date(2007, 9, 19),
       status: "Ongoing",
       info: "Clicked text to eidt",
-      tasks: {},
+      tasks: [],
     },
     {
       customer: "Pete",
@@ -121,7 +121,7 @@ export const JobProvider = (props) => {
       startDate: new Date(2004, 11, 11),
       status: "Closed",
       info: "Clicked text to eidt",
-      tasks: {},
+      tasks: [],
     },
   ]);
 
