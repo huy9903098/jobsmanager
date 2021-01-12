@@ -9,6 +9,7 @@ import {
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
+import { ChatContext } from "../../utils/ChatContext";
 import { JobContext } from "../../utils/JobContext";
 import JobChat from "./JobChat/JobChat";
 import JobInfo from "./JobInfo";
@@ -27,21 +28,20 @@ const useStyles = makeStyles((theme) => ({
   disableLink: {
     color: "inherit",
   },
+  gridContainer: {
+    height: "90vh",
+  },
   infoContainer: {
-    height: "100vh",
-
     borderLeft: "1px solid black",
     overflow: "scroll",
   },
-  chatContainer: {
-    height: "100vh",
-  },
   navbar: {
-    zIndex: 100,
+    zIndex: "10vh",
   },
 }));
 export default function Job() {
   const [jobs, setJobs] = useContext(JobContext);
+  const [chats, setChats] = useContext(ChatContext);
   const classes = useStyles();
   const { id } = useParams();
 
@@ -68,10 +68,10 @@ export default function Job() {
       </AppBar>
       <Grid className={classes.gridContainer} container>
         <Grid item xs={12} sm={7}>
-          <JobChat />
+          <JobChat chats={chats} jobId={id} setChats={setChats} />
         </Grid>
         <Grid item xs={12} sm={5} padding={0} className={classes.infoContainer}>
-          <JobInfo jobData={jobData} setJobs={setJobs} jobId={id} />
+          <JobInfo jobData={jobData} setJobs={setJobs} jobId={id} jobs={jobs} />
         </Grid>
       </Grid>
     </div>

@@ -1,6 +1,7 @@
 import { Box, Divider, makeStyles } from "@material-ui/core";
 import { React, useState } from "react";
 import JobData from "./JobData";
+import JobTask from "./JobTask";
 
 const useStyles = makeStyles((theme) => ({
   pictureContainer: {
@@ -15,8 +16,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function JobInfo({ jobData, setJobs, jobId }) {
-  // const [editStatus, setTitleStatus] = useState(false);
-  // const [editInfo, setTitleInfo] = useState(false);
   const [jobInfoData, setJobInfoData] = useState(jobData);
   const classes = useStyles();
   return (
@@ -30,7 +29,9 @@ export default function JobInfo({ jobData, setJobs, jobId }) {
       <Divider />
       <Box className={classes.pictureContainer}>Photo</Box>
       <Divider />
-      <Box className={classes.taskContainer}>Task List</Box>
+      <Box className={classes.taskContainer}>
+        <JobTask jobInfoData={jobInfoData} />
+      </Box>
     </div>
   );
 }

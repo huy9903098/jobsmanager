@@ -6,32 +6,78 @@ export const JobProvider = (props) => {
     {
       customer: "Wang",
       endDate: new Date(1992, 1, 1),
-      id: "1",
+      id: "1a",
       jobname: "Cupcake sugar",
       location: "Hawaii",
       startDate: new Date(2002, 1, 1),
       status: "Ongoing",
       info: "Clicked text to eidt",
+      tasks: [
+        {
+          id: "1",
+          name: "task 1",
+          createdMessage: {
+            id: "1",
+            message: "Remember to buy milk",
+          },
+          dueDate: new Date(2021, 4, 11),
+          assignedMessage: [
+            {
+              id: "2",
+              message: "The milk got it",
+            },
+            {
+              id: "3",
+              message: "cow milk is best",
+            },
+            {
+              id: "4",
+              message: "milk is expired",
+            },
+          ],
+        },
+        {
+          id: "2",
+          name: "task 2",
+          dueDate: new Date(2022, 2, 19),
+          createdMessage: {
+            id: "5",
+            message: "Remember to buy book",
+          },
+          assignedMessage: [
+            {
+              id: "6",
+              message: "book is knowledge",
+            },
+            {
+              id: "7",
+              message: "Code book are best",
+            },
+          ],
+        },
+      ],
     },
     {
       customer: "Jon",
       endDate: new Date(1995, 1, 11),
-      id: "2",
+      id: "2a",
       jobname: "Cheese rolling",
       location: "America",
       startDate: new Date(2002, 5, 7),
       status: "Closed",
       info: "Clicked text to eidt",
+      tasks: {},
     },
     {
       customer: "zhongli",
       endDate: new Date(1989, 7, 17),
-      id: "3",
+      id: "3b",
       jobname: "Tower building",
       location: "China",
       startDate: new Date(2011, 4, 1),
       status: "Ongoing",
       info: "Clicked text to eidt",
+      tasks: {},
     },
     {
       customer: "Jon",
@@ -42,6 +88,7 @@ export const JobProvider = (props) => {
       startDate: new Date(2002, 1, 1),
       status: "Ongoing",
       info: "Clicked text to eidt",
+      tasks: {},
     },
     {
       customer: "Pete",
@@ -52,6 +99,7 @@ export const JobProvider = (props) => {
       startDate: new Date(2002, 1, 1),
       status: "Pending",
       info: "Clicked text to eidt",
+      tasks: {},
     },
     {
       customer: "Lisa",
@@ -62,6 +110,7 @@ export const JobProvider = (props) => {
       startDate: new Date(2007, 9, 19),
       status: "Ongoing",
       info: "Clicked text to eidt",
+      tasks: {},
     },
     {
       customer: "Pete",
@@ -72,6 +121,7 @@ export const JobProvider = (props) => {
       startDate: new Date(2004, 11, 11),
       status: "Closed",
       info: "Clicked text to eidt",
+      tasks: {},
     },
   ]);
 
