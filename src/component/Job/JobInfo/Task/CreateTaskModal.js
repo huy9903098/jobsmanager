@@ -74,11 +74,17 @@ export default function CreateTaskModal({
     const taskIndex = jobData.tasks.findIndex((emp) => {
       return emp.id.toString() === taskChoose.id;
     });
+
     let currentJob = jobData;
-    currentJob["tasks"][taskIndex].assignedMessage.push({
-      id: chat.id,
-      message: chat.message,
-    });
+
+    if (
+      !jobData["tasks"][taskIndex].assignedMessage.find((x) => x.id === chat.id)
+    ) {
+      currentJob["tasks"][taskIndex].assignedMessage.push({
+        id: chat.id,
+        message: chat.message,
+      });
+    }
 
     setJobs(() => {
       const jobIndex = jobs.findIndex((emp) => {
@@ -88,6 +94,7 @@ export default function CreateTaskModal({
         return index === jobIndex ? currentJob : obj;
       });
     });
+    closeModel();
   };
   return (
     <div className={classes.paper}>
