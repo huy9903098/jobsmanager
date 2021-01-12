@@ -70,11 +70,10 @@ export default function CreateJob({ user, setJobs }) {
     setJob({ ...job, [name]: newValue });
   };
   useEffect(() => {
-    if (user && user.name) {
-      setJob({ ...job, customer: user.name });
-    }
     if (user && user.location && user.name) {
       setJob({ ...job, location: user.location, customer: user.name });
+    } else if (user && user.name) {
+      setJob({ ...job, customer: user.name });
     }
   }, [user]);
 
@@ -95,6 +94,15 @@ export default function CreateJob({ user, setJobs }) {
       };
 
       setJobs((prevJobs) => [...prevJobs, jobFinal]);
+      setJob({
+        id: uuidv4(),
+        jobname: null,
+        customer: user && user.name ? user.name : null,
+        endDate: "2020-01-11",
+        startDate: "2020-01-11",
+        status: "Pending",
+        location: user && user.location ? user.location : null,
+      });
       setOpen(false);
     }
   };
