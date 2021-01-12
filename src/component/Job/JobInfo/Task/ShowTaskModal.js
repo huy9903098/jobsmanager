@@ -14,6 +14,7 @@ import React from "react";
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
+    overflow: "scroll",
     width: 400,
     maxHeight: 300,
     backgroundColor: theme.palette.background.paper,

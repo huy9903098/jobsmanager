@@ -2,8 +2,6 @@ import Divider from "@material-ui/core/Divider";
 import Fab from "@material-ui/core/Fab";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -11,6 +9,7 @@ import CameraAltIcon from "@material-ui/icons/CameraAlt";
 import SendIcon from "@material-ui/icons/Send";
 import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import ChatItem from "./ChatItem";
 
 const useStyles = makeStyles({
   table: {
@@ -35,14 +34,23 @@ const useStyles = makeStyles({
   },
 });
 
-export default function JobChat({ chats, jobId, setChats }) {
+export default function JobChat({
+  chats,
+  jobId,
+  setChats,
+  jobs,
+  setJobs,
+  jobData,
+}) {
   const classes = useStyles();
+
   const [messages, setMessages] = useState({
     id: uuidv4(),
     message: "",
     date: new Date(),
     userId: "admin",
   });
+
   const messagesEndRef = useRef(null);
 
   const handleInput = (evt) => {
@@ -78,23 +86,13 @@ export default function JobChat({ chats, jobId, setChats }) {
         <List className={classes.messageArea}>
           {chats[jobId] &&
             chats[jobId].map((chat) => (
-              <ListItem key={chat.id}>
-                <Grid container>
-                  <Grid item xs={12}>
-                    <ListItemText
-                      className={classes.messageItem}
-                      align={chat.userId === "admin" ? "right" : "left"}
-                      primary={chat.message}
-                    ></ListItemText>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <ListItemText
-                      align={chat.userId === "admin" ? "right" : "left"}
-                      secondary={chat.date.toLocaleDateString()}
-                    ></ListItemText>
-                  </Grid>
-                </Grid>
-              </ListItem>
+              <ChatItem
+                setChats={setChats}
+                chat={chat}
+                jobs={jobs}
+                setJobs={setJobs}
+                jobData={jobData}
+              />
             ))}
           <div ref={messagesEndRef} />
         </List>
@@ -107,7 +105,6 @@ export default function JobChat({ chats, jobId, setChats }) {
           </Grid>
           <Grid item xs={9}>
             <TextField
-              id="outlined-basic-email"
               label="Type Something"
               name="message"
               value={messages.message}

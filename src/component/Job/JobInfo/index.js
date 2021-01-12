@@ -7,9 +7,10 @@ const useStyles = makeStyles((theme) => ({
   pictureContainer: {
     height: "150px",
     overflow: "scroll",
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
   },
   taskContainer: {
+    minHeight: "200px",
     overflow: "scroll",
     padding: theme.spacing(2),
   },
@@ -30,7 +31,7 @@ export default function JobInfo({ jobData, setJobs, jobId }) {
       <Box className={classes.pictureContainer}>Photo</Box>
       <Divider />
       <Box className={classes.taskContainer}>
-        <JobTask jobInfoData={jobInfoData} />
+        <JobTask jobInfoData={jobData} />
       </Box>
     </div>
   );

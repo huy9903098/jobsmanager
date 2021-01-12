@@ -7,11 +7,11 @@ import {
   Typography,
 } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ChatContext } from "../../utils/ChatContext";
 import { JobContext } from "../../utils/JobContext";
-import JobChat from "./JobChat/JobChat";
+import JobChat from "./JobChat";
 import JobInfo from "./JobInfo";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     height: "90vh",
   },
   infoContainer: {
+    height: "92vh",
     borderLeft: "1px solid black",
     overflow: "scroll",
   },
@@ -46,6 +47,9 @@ export default function Job() {
   const { id } = useParams();
 
   let jobData = jobs.find((x) => x.id === id);
+  useEffect(() => {
+    jobData = jobs.find((x) => x.id === id);
+  }, [jobs]);
   return (
     <div>
       <AppBar className={classes.navbar} position="static">
@@ -68,7 +72,13 @@ export default function Job() {
       </AppBar>
       <Grid className={classes.gridContainer} container>
         <Grid item xs={12} sm={7}>
-          <JobChat chats={chats} jobId={id} setChats={setChats} />
+          <JobChat
+            chats={chats}
+            jobId={id}
+            jobs={jobs}
+            setJobs={setJobs}
+            jobData={jobData}
+          />
         </Grid>
         <Grid item xs={12} sm={5} padding={0} className={classes.infoContainer}>
           <JobInfo jobData={jobData} setJobs={setJobs} jobId={id} jobs={jobs} />
